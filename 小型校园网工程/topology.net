@@ -1,0 +1,453 @@
+autostart = False
+version = 0.8.6
+[127.0.0.1:7202]
+    workingdir = working
+    udp = 10201
+    [[3640]]
+        image = C:\Program Files\GNS3\C3640-JK.BIN
+        idlepc = 0x60616510
+        sparsemem = True
+        ghostios = True
+        chassis = 3640
+    [[ROUTER gdut_r1]]
+        model = 3640
+        console = 2127
+        aux = 2527
+        cnfg = configs\gdut_r1.cfg
+        slot0 = NM-1FE-TX
+        f0/0 = chinanet_r2 f0/0
+        slot1 = NM-1FE-TX
+        f1/0 = sw3 f0/4
+        slot2 = NM-1FE-TX
+        f2/0 = sw4 f0/4
+        x = 211.0
+        y = -474.0
+        z = 1.0
+    [[ROUTER chinanet_r2]]
+        model = 3640
+        console = 2128
+        aux = 2528
+        cnfg = configs\chinanet_r2.cfg
+        slot0 = NM-1FE-TX
+        f0/0 = gdut_r1 f0/0
+        x = 503.0
+        y = -474.0
+        z = 1.0
+[127.0.0.1:7200]
+    workingdir = working
+    udp = 10001
+    [[3640]]
+        image = C:\Program Files\GNS3\C3640-JK.BIN
+        idlepc = 0x60616510
+        sparsemem = True
+        ghostios = True
+        chassis = 3640
+    [[ROUTER pc2]]
+        model = 3640
+        console = 2111
+        aux = 2511
+        cnfg = configs\pc2.cfg
+        slot0 = NM-1FE-TX
+        f0/0 = sw1 f0/1
+        symbol = computer
+        x = 40.0
+        y = -37.0
+        z = 1.0
+    [[ROUTER pc1]]
+        model = 3640
+        console = 2110
+        aux = 2510
+        cnfg = configs\pc1.cfg
+        slot0 = NM-1FE-TX
+        f0/0 = sw1 f0/0
+        symbol = computer
+        x = -274.0
+        y = -45.0
+        z = 1.0
+    [[ROUTER sw1]]
+        model = 3640
+        console = 2109
+        aux = 2509
+        cnfg = configs\sw1.cfg
+        slot0 = NM-16ESW
+        f0/0 = pc1 f0/0
+        f0/1 = pc2 f0/0
+        f0/2 = sw2 f0/2
+        f0/3 = sw3 f0/2
+        f0/4 = sw4 f0/2
+        symbol = ethernet_switch
+        x = -137.0
+        y = -137.0
+        z = 1.0
+    [[ROUTER sw2]]
+        model = 3640
+        console = 2116
+        aux = 2516
+        cnfg = configs\sw2.cfg
+        slot0 = NM-16ESW
+        f0/0 = pc3 f0/0
+        f0/1 = pc4 f0/0
+        f0/2 = sw1 f0/2
+        f0/3 = sw3 f0/3
+        f0/4 = sw4 f0/3
+        symbol = ethernet_switch
+        x = 548.0
+        y = -131.0
+        z = 1.0
+[127.0.0.1:7201]
+    workingdir = working
+    udp = 10101
+    [[3640]]
+        image = C:\Program Files\GNS3\C3640-JK.BIN
+        idlepc = 0x60616510
+        sparsemem = True
+        ghostios = True
+        chassis = 3640
+    [[ROUTER pc4]]
+        model = 3640
+        console = 2118
+        aux = 2518
+        cnfg = configs\pc4.cfg
+        slot0 = NM-1FE-TX
+        f0/0 = sw2 f0/1
+        symbol = computer
+        x = 658.0
+        y = -45.0
+        z = 1.0
+    [[ROUTER pc3]]
+        model = 3640
+        console = 2117
+        aux = 2517
+        cnfg = configs\pc3.cfg
+        slot0 = NM-1FE-TX
+        f0/0 = sw2 f0/0
+        symbol = computer
+        x = 347.0
+        y = -44.0
+        z = 1.0
+    [[ROUTER sw3]]
+        model = 3640
+        console = 2123
+        aux = 2523
+        cnfg = configs\sw3.cfg
+        slot0 = NM-16ESW
+        f0/0 = sw4 f0/0
+        f0/1 = sw4 f0/1
+        f0/2 = sw1 f0/3
+        f0/3 = sw2 f0/3
+        f0/4 = gdut_r1 f1/0
+        symbol = route_switch_processor
+        x = 87.0
+        y = -350.0
+        z = 1.0
+    [[ROUTER sw4]]
+        model = 3640
+        console = 2124
+        aux = 2524
+        cnfg = configs\sw4.cfg
+        slot0 = NM-16ESW
+        f0/0 = sw3 f0/0
+        f0/1 = sw3 f0/1
+        f0/2 = sw1 f0/4
+        f0/3 = sw2 f0/4
+        f0/4 = gdut_r1 f2/0
+        symbol = route_switch_processor
+        x = 347.0
+        y = -351.0
+        z = 1.0
+[GNS3-DATA]
+    configs = configs
+    workdir = working
+    m11 = 1.0
+    m22 = 1.0
+    [[NOTE 1]]
+        text = "通向外网路由"
+        x = 115.0
+        y = -464.5
+    [[NOTE 2]]
+        text = "vlan 20\n  办公"
+        x = 600.0
+        y = -36.5
+    [[NOTE 3]]
+        text = "vlan 10\n  学习"
+        x = -336.0
+        y = -39.5
+    [[NOTE 4]]
+        text = "外网IP：2.2.2.2"
+        x = 480.0
+        y = -415.5
+    [[NOTE 5]]
+        text = "trunk"
+        x = 213.0
+        y = -318.5
+    [[NOTE 6]]
+        text = "trunk"
+        x = 321.0
+        y = -252.5
+    [[NOTE 7]]
+        text = "trunk"
+        x = 210.0
+        y = -143.5
+    [[NOTE 8]]
+        text = "192.168.2.254"
+        x = 648.0
+        y = 44.5
+    [[NOTE 9]]
+        text = "100.1.1.0/24"
+        x = 334.0
+        y = -474.5
+    [[NOTE 10]]
+        text = "trunk"
+        x = 476.0
+        y = -240.5
+    [[NOTE 11]]
+        text = "192.168.1.0/24"
+        x = -152.0
+        y = -76.5
+    [[NOTE 12]]
+        text = ".3"
+        x = 157.0
+        y = -360.5
+    [[NOTE 13]]
+        text = "ospf area 0"
+        x = 194.0
+        y = -394.5
+    [[NOTE 14]]
+        text = "vlan 20\n  办公"
+        x = -19.0
+        y = -19.5
+    [[NOTE 15]]
+        text = "172.16.20.0/24"
+        x = 315.0
+        y = -410.5
+    [[NOTE 16]]
+        text = ".4"
+        x = 314.0
+        y = -358.5
+    [[NOTE 17]]
+        text = "192.168.1.3/24"
+        x = 321.0
+        y = 26.5
+    [[NOTE 18]]
+        text = ".1"
+        x = 291.0
+        y = -476.5
+    [[NOTE 19]]
+        text = "172.16.10.0/24"
+        x = 50.0
+        y = -411.5
+    [[NOTE 20]]
+        text = ".2"
+        x = 475.0
+        y = -476.5
+    [[NOTE 21]]
+        text = "trunk"
+        x = -43.0
+        y = -241.5
+    [[NOTE 22]]
+        text = "192.168.2.2/24"
+        x = 12.0
+        y = 28.5
+    [[NOTE 23]]
+        text = "vlan 10\n  学习"
+        x = 287.0
+        y = -29.5
+    [[NOTE 24]]
+        text = "192.168.2.254"
+        x = 13.0
+        y = 47.5
+    [[NOTE 25]]
+        text = "192.168.1.1/24"
+        x = -298.0
+        y = 20.5
+    [[NOTE 26]]
+        text = ".1"
+        x = 236.0
+        y = -438.5
+    [[NOTE 27]]
+        text = "192.168.1.254"
+        x = -297.0
+        y = 37.5
+    [[NOTE 28]]
+        text = "192.168.1.254"
+        x = 325.0
+        y = 47.5
+    [[NOTE 29]]
+        text = "192.168.2.4/24"
+        x = 638.0
+        y = 21.5
+    [[NOTE 30]]
+        text = "f0/3"
+        x = 54.3254459435
+        y = 51.7325380404
+        interface = sw4 f0/3
+    [[NOTE 31]]
+        text = "f0/1"
+        x = -43.5189347723
+        y = 5.15388199778
+        interface = sw4 f0/1
+    [[NOTE 32]]
+        text = "f0/0"
+        x = -39.4997041453
+        y = 27.1538450159
+        interface = sw4 f0/0
+    [[NOTE 33]]
+        text = "f0/2"
+        x = -40.4368950045
+        y = 49.3514099491
+        interface = sw4 f0/2
+    [[NOTE 34]]
+        text = "f0/4"
+        x = -26.1855720737
+        y = -23.8705576488
+        interface = sw4 f0/4
+    [[NOTE 35]]
+        text = "f0/4"
+        x = -11.3254459435
+        y = -39.7325380404
+        interface = sw2 f0/4
+    [[NOTE 36]]
+        text = "f0/3"
+        x = -46.2617629016
+        y = -19.7661913081
+        interface = sw2 f0/3
+    [[NOTE 37]]
+        text = "f0/2"
+        x = -43.4984656432
+        y = 9.64964847612
+        interface = sw2 f0/2
+    [[NOTE 38]]
+        text = "f0/0"
+        x = -0.382000313344
+        y = 33.6771619191
+        interface = sw2 f0/0
+    [[NOTE 39]]
+        text = "f0/1"
+        x = 64.7922314886
+        y = 43.2390376926
+        interface = sw2 f0/1
+    [[NOTE 40]]
+        text = "f0/3"
+        x = 62.2617629016
+        y = 48.7661913081
+        interface = sw3 f0/3
+    [[NOTE 41]]
+        text = "f0/1"
+        x = 60.4804735183
+        y = 6.84619196589
+        interface = sw3 f0/1
+    [[NOTE 42]]
+        text = "f0/0"
+        x = 65.4997041453
+        y = 26.8461549841
+        interface = sw3 f0/0
+    [[NOTE 43]]
+        text = "f0/2"
+        x = -24.9976062265
+        y = 64.0164991608
+        interface = sw3 f0/2
+    [[NOTE 44]]
+        text = "f0/4"
+        x = 46.4104011174
+        y = -25.6532635046
+        interface = sw3 f0/4
+    [[NOTE 45]]
+        text = "f0/4"
+        x = 74.4368950045
+        y = -13.3514099491
+        interface = sw1 f0/4
+    [[NOTE 46]]
+        text = "f0/3"
+        x = 49.9976062265
+        y = -40.0164991608
+        interface = sw1 f0/3
+    [[NOTE 47]]
+        text = "f0/2"
+        x = 75.4984656432
+        y = 16.3503515239
+        interface = sw1 f0/2
+    [[NOTE 48]]
+        text = "f0/0"
+        x = 3.55484642606
+        y = 40.0729550146
+        interface = sw1 f0/0
+    [[NOTE 49]]
+        text = "f0/1"
+        x = 69.0025085278
+        y = 37.8536478041
+        interface = sw1 f0/1
+    [[NOTE 50]]
+        text = "f0/0"
+        x = 65.3525003917
+        y = -15.5964523988
+        interface = pc3 f0/0
+    [[NOTE 51]]
+        text = "f0/0"
+        x = -7.0
+        y = 22.0
+        interface = chinanet_r2 f0/0
+    [[NOTE 52]]
+        text = "f0/0"
+        x = -27.1152893607
+        y = -15.5487971158
+        interface = pc4 f0/0
+    [[NOTE 53]]
+        text = "f0/0"
+        x = 72.4314419674
+        y = -0.591193768311
+        interface = pc1 f0/0
+    [[NOTE 54]]
+        text = "f0/0"
+        x = 73.0
+        y = 22.0
+        interface = gdut_r1 f0/0
+    [[NOTE 55]]
+        text = "f2/0"
+        x = 60.6855720737
+        y = 50.8705576488
+        interface = gdut_r1 f2/0
+    [[NOTE 56]]
+        text = "f1/0"
+        x = 5.08959888256
+        y = 50.6532635046
+        interface = gdut_r1 f1/0
+    [[NOTE 57]]
+        text = "f0/0"
+        x = -9.37813565976
+        y = 2.18294024492
+        interface = pc2 f0/0
+    [[SHAPE 1]]
+        type = ellipse
+        x = 435.0
+        y = -498.0
+        width = 200.0
+        height = 150.0
+        border_style = 2
+    [[SHAPE 2]]
+        type = ellipse
+        x = 592.0
+        y = -106.0
+        width = 200.0
+        height = 200.0
+        border_style = 2
+    [[SHAPE 3]]
+        type = ellipse
+        x = -342.0
+        y = -115.0
+        width = 200.0
+        height = 200.0
+        border_style = 2
+    [[SHAPE 4]]
+        type = ellipse
+        x = -27.0
+        y = -103.0
+        width = 200.0
+        height = 200.0
+        border_style = 2
+    [[SHAPE 5]]
+        type = ellipse
+        x = 278.0
+        y = -102.0
+        width = 200.0
+        height = 200.0
+        border_style = 2
